@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <h3>Register Page</h3>
+
+    <form action="/register" method="POST">
+        <label for="name">Masukan Nama</label>
+        <div>
+            <input type="text" name="name" placeholder="Nama" required>
+        </div>
+        <label for="email">Masukan Email</label>
+        <div>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <label for="password">Masukan Password</label>
+        <div>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+        <div><button type="submit">Register</button></div>
+    </form>
+
+    <button><a href="/login">Login</a></button>
+
+
+    <script>
+        const socket = io();
+
+        socket.on('newNotification', (data) => {
+            alert(data.message);
+        });
+
+
+    </script>
+</body>
+
+</html>

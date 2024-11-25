@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <h3>Reset Page</h3>
+
+    <form action="/reset-password" method="POST">
+        <label for="password">Masukan Password</label>
+        <div>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+        <label for="confirmPassword">Masukan Konfirmasi Password</label>
+        <div>
+            <input type="password" name="confirmPassword" placeholder="Konfirmasi Password" required>
+        </div>
+        <div><button type="submit">Submit</button></div>
+    </form>
+
+    <script>
+        const socket = io();
+
+        socket.on('newNotification', (data) => {
+            alert(data.message);
+        });
+    </script>
+</body>
+
+</html>

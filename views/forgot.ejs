@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <h3>Forgot Password</h3>
+
+    <form action="/forgot-password" method="POST">
+        <label for="email">Masukan Email</label>
+        <div>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <script>
+        const socket = io();
+
+        socket.on('newNotification', (data) => {
+            alert(data.message);
+        });
+    </script>
+</body>
+
+</html>

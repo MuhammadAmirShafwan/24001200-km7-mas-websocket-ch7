@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="notification"></div>
+    <button id="button-trigger">Send Notif</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+
+        // Menampilkan prompt hanya sekali saat halaman pertama kali dimuat
+        const promptData = prompt('Masukkan Notifikasi');
+
+        // Emit pesan ke server setelah prompt diisi
+        if (promptData) {
+            socket.emit('sendNotification', { message: promptData });
+        }
+
+        // Menambahkan event listener untuk tombol send notif
+        const button = document.getElementById('button-trigger');
+        button.addEventListener('click', () => {
+            // Mengirim pesan yang dimasukkan ke server
+            if (promptData) {
+                socket.emit('sendNotification', { message: promptData });
+            }
+        });
+
+        // Menerima notifikasi dari server dan menampilkannya
+        socket.on('notification', (data) => {
+            const notificationDiv = document.getElementById('notification');
+
+            // Menambahkan pesan baru ke dalam kontainer notifikasi
+            const newNotification = document.createElement('p');
+            newNotification.textContent = data.message;
+            notificationDiv.appendChild(newNotification); // Menambahkan elemen baru
+
+        });
+    </script>
+</body>
+
+</html>
